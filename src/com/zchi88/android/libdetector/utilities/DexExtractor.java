@@ -14,6 +14,9 @@ import java.util.jar.JarFile;
  * 
  */
 public class DexExtractor {
+	private static final String DEX2JAR_VERSION = "dex2jar-2.1";
+	private static final String DEX2JAR_FILE = "d2j-dex2jar.bat";
+	
 	/**
 	 * Extracts the class files from all APKs found at the specified folder, and
 	 * places them in a separate folder
@@ -48,7 +51,7 @@ public class DexExtractor {
 			System.out.println("Classes.dex files for " + apkFile + " have not been extracted. Extracting now...");
 		}
 		
-		Path pathToDex2Jar = Paths.get("dex2jar\\dex2jar.bat").toAbsolutePath();
+		Path pathToDex2Jar = Paths.get("").toAbsolutePath().resolve(DEX2JAR_VERSION).resolve(DEX2JAR_FILE);
 		Path extractedApkFolder = Paths.get("Extracted_APKs");
 		File extractedApkFile = new File(apkFile.getName().replace(".apk", ""));
 		Path extractionPath = apkFile.toPath().getParent().getParent().resolve(extractedApkFolder)

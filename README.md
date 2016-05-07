@@ -5,6 +5,7 @@ A tool for detecting external third party libraries used in Android apps. It doe
 
 ## DEPENDENCIES
 - Java 1.7+
+- dex2jar-2.1
 
 ## GET THE TOOL
 Simply clone this repository to your local machine.
@@ -39,12 +40,13 @@ This tool works in conjunction with the LibDiff tool, which computes the diffs b
 1. Choose any directory to be the tool's working directory.
 2. In that working directory, create another directory named ```"Android_APKs"```. Note that the name must be exact so that the LibDetector tool and locate it. 
 3. Collect any APK's that you would like the tool to analyze, and place them in the Android_APKs folder as is.
-4. Place the runnable LibDetector.jar file in the working directory next to the Android_APKs folder.
+4. Place the dex2jar folder included with the tool in the working directory.
+5. Place the runnable LibDetector.jar file in the working directory next to the Android_APKs folder.
 An example of the folder structure is shown below. Note that in this example, the libraries whitelist is in the same directory as well. While this is NOT a requirement, it is recommended.
 	
 	![LibDector Folder Structure](https://github.com/zchi88/LibDetector/blob/master/LibDetectorRequirements.jpg?raw=true "LibDector Folder Structure")
 
-5. In the command line, make sure that you have moved to the working directory. Then, issue the following command to run the tool:
+6. In the command line, make sure that you have moved to the working directory. Then, issue the following command to run the tool:
 
 	```console
 	java -jar LibDetector.jar PATH/TO/WHITELIST_LIBRARIES
@@ -52,7 +54,7 @@ An example of the folder structure is shown below. Note that in this example, th
 	
 	Note that the tool expects one argument, which is the path to the libraries whitelist. This is the same whitelist that is being used and maintained by the LibDiff tool.
 
-6. The tool will then create an ```"Extracted_APKs"``` folder. For each APK, it will create a folder in the ```"Extracted_APKs"``` folder named after the APK, and extract the bytecode of the APK to this folder. It will then scan the byecode and try to find matches to any libraries in the provided libraries whitelist. The results will be outputted to a ```libraryMatchResults.txt``` file.
+7. The tool will then create an ```"Extracted_APKs"``` folder. For each APK, it will create a folder in the ```"Extracted_APKs"``` folder named after the APK, and extract the bytecode of the APK to this folder. It will then scan the byecode and try to find matches to any libraries in the provided libraries whitelist. The results will be outputted to a ```libraryMatchResults.txt``` file.
 
 
 ### NOTES
