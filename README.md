@@ -42,7 +42,7 @@ This tool works in conjunction with the LibDiff tool, which computes the diffs b
 4. Place the runnable LibDetector.jar file in the working directory next to the Android_APKs folder.
 An example of the folder structure is shown below. Note that in this example, the libraries whitelist is in the same directory as well. While this is NOT a requirement, it is recommended.
 
-![LibDector Folder Structure](https "LibDector Folder Structure")
+![LibDector Folder Structure](https://github.com/zchi88/LibDetector/blob/master/LibDetectorRequirements.jpg?raw=true "LibDector Folder Structure")
 
 5. In the command line, make sure that you have moved to the working directory. Then, issue the following command to run the tool:
 
