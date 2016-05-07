@@ -27,7 +27,7 @@ public class DexExtractor {
 		File[] apkFiles = apksFolder.toFile().listFiles();
 		for (File file : apkFiles) {
 			if (file.getName().endsWith(".apk")) {
-				extractBytecode(file, true);
+				extractJars(file, true);
 			} else {
 				System.err.println("Warning: " + file + " is not an APK. Skipping file...");
 			}
@@ -43,7 +43,7 @@ public class DexExtractor {
 	 * @throws InterruptedException
 	 * @throws IOException
 	 */
-	public static void extractBytecode(File apkFile, Boolean showOutput) throws InterruptedException, IOException {
+	public static void extractJars(File apkFile, Boolean showOutput) throws InterruptedException, IOException {
 		if (showOutput) {
 			System.out.println("Classes.dex files for " + apkFile + " have not been extracted. Extracting now...");
 		}
