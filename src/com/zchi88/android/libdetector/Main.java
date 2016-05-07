@@ -22,6 +22,7 @@ import com.zchi88.android.libdetector.utilities.Timer;
  */
 public class Main {
 	// The maximum number of threads running concurrently to process the APKs. Optimal size will vary depending on the power of your machine.
+	// If your machine experiences noticeable performance drops while running the tool, the number of threads may need to be reduced
 	private static final int THREADPOOL_SIZE = 3;
 	private static HashMap<Path, ArrayList<LibraryVersion>> libsSnapshot;
 	
