@@ -22,7 +22,7 @@ import com.zchi88.android.libdetector.utilities.Timer;
  */
 public class Main {
 	// The maximum number of threads running concurrently to process the APKs. Optimal size will vary depending on the power of your machine.
-	private static final int THREADPOOL_SIZE = 5;
+	private static final int THREADPOOL_SIZE = 3;
 	private static HashMap<Path, ArrayList<LibraryVersion>> libsSnapshot;
 	
 	
@@ -55,10 +55,7 @@ public class Main {
 		
 		Path relApksPath = Paths.get("Android_APKs");
 		
-		
 		Path workingDir = Paths.get("").toAbsolutePath();
-		
-
 		
 		Path absApksPath = workingDir.resolve(relApksPath);
 		
