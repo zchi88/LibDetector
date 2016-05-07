@@ -41,16 +41,21 @@ public class LibDetector implements Runnable {
 	 * @throws IOException
 	 */
 	private void identifyLibs() throws InterruptedException, IOException {
-		System.out.println("Scanning " + apkFile + " now for libraries.");
-		ApkProcessor.processApk(apkFile);
-
 		Path workingDir = apkFile.toPath().getParent().getParent();
 		Path relExtractionPath = Paths.get("Extracted_APKs").resolve(apkFile.getName().replace(".apk", ""));
-		Path outputTextPath = workingDir.resolve(relExtractionPath);
 		Path decompiledApkPath = workingDir.resolve(relExtractionPath).resolve("byteCode");
+		Path outputTextPath = workingDir.resolve(relExtractionPath);
+		File outputFile = new File("libraryMatchResults.txt");
+		Path outputFilePath = outputTextPath.resolve(outputFile.toPath());
 
-		HashMap<Path, ArrayList<LibraryStats>> libMatches = matchVersions(libsSnapshot, decompiledApkPath);
-		outputResults(outputTextPath, libMatches);
+		// Only run on the APK if its results haven't already been computed
+		if (!outputFilePath.toFile().exists()) {
+			System.out.println("Scanning " + apkFile + " now for libraries.");
+			ApkProcessor.processApk(apkFile);
+
+			HashMap<Path, ArrayList<LibraryStats>> libMatches = matchVersions(libsSnapshot, decompiledApkPath);
+			outputResults(outputTextPath, libMatches);
+		}
 	}
 
 	/**
