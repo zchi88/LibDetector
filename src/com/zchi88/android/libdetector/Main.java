@@ -10,6 +10,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.zchi88.android.libdetector.libmetadata.LibraryMetadata;
+import com.zchi88.android.libdetector.libmetadata.LibraryStats;
 import com.zchi88.android.libdetector.libmetadata.LibraryVersion;
 import com.zchi88.android.libdetector.utilities.LibSnapshot;
 import com.zchi88.android.libdetector.utilities.Timer;
@@ -100,11 +102,18 @@ public class Main {
 			System.out.println("Finished scanning APK's for libraries.");
 		}
 		
+		// Show how long it took to scan all the APKs for libraries
 		long endTime = System.currentTimeMillis();
 		System.out.println("Processed " + apkFiles.length + " APKs in " + Timer.msToString(endTime-startTime));
+		System.out.println();
 		
+		// Compute the metadata for the libraries found in the APKs
+		Path relExtractPath = Paths.get("Extracted_APKs");
+		Path absExtractPath = workingDir.resolve(relExtractPath);
+		HashMap<String, LibraryStats> libMetadata = LibraryMetadata.computeMetadata(absExtractPath);
+		
+		// Write the metadata to a text file
+		File outputFile = workingDir.resolve("libMetadata.txt").toFile();
+		LibraryMetadata.metadataToFile(libMetadata, outputFile);
 	}
-	
-	
-	
 }
