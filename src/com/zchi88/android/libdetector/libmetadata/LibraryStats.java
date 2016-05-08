@@ -6,7 +6,7 @@ public class LibraryStats {
 		this.versionName = versionName;
 		this.versionAge = versionAge;
 		this.levenshteinToCharRatio = levRatio;
-		this.libCount = 0;
+		this.libCount = 1;
 	}
 	
 	private String libName;
