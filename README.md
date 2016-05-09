@@ -61,5 +61,5 @@ An example of the folder structure is shown below. Note that in this example, th
 The ```libraryMatchResults.txt``` mentions the term "Levenshtein Ratio". This refers to the ratio of the Levenshtein distance between the class files of a library in the whitelist and the library that exists in the APK to the total size of those files. A ratio of 1.0 means that the files are completely different, and therefore the app most likely does not use that library. However, a ratio of 0.0 means that the files are complete copies, and therefore the app most likely IS using that library.
 
 
-### Known Issues
+### KNOWN ISSUES
 Some APK's have class files that conincide with reserved keywords of the Windows OS (such as "con" or "aux"). Therefore, running the tool on a Windows machine will throw a ```FileNotFoundException``` when it comes across such files, because it cannot create the class file on the disk when it tries to extract out the class files from the APK. The result is that for these APK's, the tool may partially extract out valid class files before it runs into this error, at which point the APK will get skipped for the library scan.
