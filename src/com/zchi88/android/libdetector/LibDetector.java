@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Set;
 
+import com.zchi88.android.libdetector.libmetadata.LibraryMetadata;
 import com.zchi88.android.libdetector.libmetadata.LibraryStats;
 import com.zchi88.android.libdetector.libmetadata.LibraryVersion;
 import com.zchi88.android.libdetector.utilities.ApkProcessor;
@@ -28,6 +29,7 @@ public class LibDetector implements Runnable {
 	private static final double LEVEN_THRESHHOLD = 0.5;
 	private HashMap<Path, ArrayList<LibraryVersion>> libsSnapshot;
 	private File apkFile;
+	private static String outputFileName = LibraryMetadata.LIB_RESULTS_FILENAME;
 
 	public LibDetector(HashMap<Path, ArrayList<LibraryVersion>> libsSnapshot, File apkFile) {
 		this.libsSnapshot = libsSnapshot;
@@ -45,7 +47,7 @@ public class LibDetector implements Runnable {
 		Path relExtractionPath = Paths.get("Extracted_APKs").resolve(apkFile.getName().replace(".apk", ""));
 		Path decompiledApkPath = workingDir.resolve(relExtractionPath).resolve("byteCode");
 		Path outputTextPath = workingDir.resolve(relExtractionPath);
-		File outputFile = new File("libraryMatchResults.txt");
+		File outputFile = new File(outputFileName);
 		Path outputFilePath = outputTextPath.resolve(outputFile.toPath());
 
 		// Only run on the APK if its results haven't already been computed
@@ -56,6 +58,10 @@ public class LibDetector implements Runnable {
 			HashMap<Path, ArrayList<LibraryStats>> libMatches = matchVersions(libsSnapshot, decompiledApkPath);
 			outputResults(outputTextPath, libMatches);
 		}
+
+		// Remove files besides the LIB_RESULTS_FILENAME to conserve hard
+		// drive space, since they are no longer needed.
+		cleanUp(outputTextPath);
 	}
 
 	/**
@@ -301,6 +307,46 @@ public class LibDetector implements Runnable {
 				}
 			}
 		}
+	}
+	
+
+	/**
+	 * Cleans up the files that were generated in order to produce the library
+	 * match results. These files are: the APK's classes.dex files, the
+	 * classes.jar files, and the all files in the byteCode folder. 
+	 * 
+	 * @param pathToClean
+	 */
+	private static void cleanUp(Path pathToClean) {
+		System.out.println("Cleaning up temporary files in " + pathToClean + ".");
+		File resultsFile = pathToClean.resolve(outputFileName).toFile();
+
+		if (resultsFile.exists()) {
+			File[] filesList = pathToClean.toFile().listFiles();
+			for (File file : filesList) {
+				if (!file.equals(resultsFile)) {
+					// Call the recursive delete method to delete the folder and all of its contents, since a non-empty folder cannot be deleted
+					recursiveDelete(file);
+				}
+			}
+		}
+	}
+
+	
+	/**
+	 * Used to recursively delete the contents of a directory. Meant specifically for deleting non-empty folders.
+	 * 
+	 * @param filePath
+	 */
+	private static void recursiveDelete(File filePath) {
+		if (filePath.isDirectory()) {
+			File[] filesList = filePath.listFiles();
+			for (File file : filesList) {
+				recursiveDelete(file);
+			}
+		}
+
+		filePath.delete();
 	}
 
 	public void run() {
