@@ -57,11 +57,10 @@ public class LibDetector implements Runnable {
 
 			HashMap<Path, ArrayList<LibraryStats>> libMatches = matchVersions(libsSnapshot, decompiledApkPath);
 			outputResults(outputTextPath, libMatches);
+			// Remove files besides the LIB_RESULTS_FILENAME to conserve hard
+			// drive space, since they are no longer needed.
+			cleanUp(outputTextPath);
 		}
-
-		// Remove files besides the LIB_RESULTS_FILENAME to conserve hard
-		// drive space, since they are no longer needed.
-		cleanUp(outputTextPath);
 	}
 
 	/**
