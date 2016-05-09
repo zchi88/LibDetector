@@ -17,11 +17,12 @@ import java.util.TreeSet;
  *
  */
 public class LibraryMetadata {
+	public static final String LIB_RESULTS_FILENAME = "libraryMatchResults.txt";
 
 	/**
 	 * Computes the metadata by creating a Hashmap representing library result
 	 * metadata, and keeping track of the number of occurences of a library in
-	 * an APK in that hashmap.
+	 * an APK in that hashmap. 
 	 * 
 	 * @param extractionPath
 	 * @return
@@ -31,23 +32,23 @@ public class LibraryMetadata {
 		System.out.println("Computing metadata for libraries found in APKs...");
 
 		File[] apksList = extractionPath.toFile().listFiles();
-		String resultFileName = "libraryMatchResults.txt";
+		String resultFileName = LIB_RESULTS_FILENAME;
 
 		HashMap<String, LibraryStats> libMetadata = new HashMap<>();
 
-		// For each apk, look through its libraryMatchResults.txt and start
+		// For each apk, look through its LIB_RESULTS_FILENAME and start
 		// tallying up the number of occurrences of a library. Store that
 		// metadata in the libMetadata Hashmap.
 		for (File apkFile : apksList) {
 			Path resultFilePath = apkFile.toPath().resolve(resultFileName);
 
-			// Make sure the libraryMatchResults.txt file exists
+			// Make sure the LIB_RESULTS_FILENAME file exists
 			if (resultFilePath.toFile().exists()) {
 				try(Scanner scanner = new Scanner(resultFilePath)) {
 					String nextLine;
 					while (scanner.hasNextLine()) {
 						nextLine = scanner.nextLine();
-						// All library results in libraryMatchResults.txt start with
+						// All library results in LIB_RESULTS_FILENAME start with
 						// a tab
 						if (nextLine.startsWith("	")) {
 							// Strip all whitespace from the string
