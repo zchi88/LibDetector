@@ -15,7 +15,8 @@ import java.util.jar.JarFile;
  */
 public class DexExtractor {
 	private static final String DEX2JAR_VERSION = "dex2jar-2.1";
-	private static final String DEX2JAR_FILE = "d2j-dex2jar.bat";
+	private static final String DEX2JAR_FILE_WINDOWS = "d2j-dex2jar.bat";
+	private static final String DEX2JAR_FILE_LINUX = "d2j-dex2jar.sh";
 	
 	/**
 	 * Extracts the class files from all APKs found at the specified folder, and
@@ -51,7 +52,6 @@ public class DexExtractor {
 			System.out.println("Classes.dex files for " + apkFile + " have not been extracted. Extracting now...");
 		}
 		
-		Path pathToDex2Jar = Paths.get("").toAbsolutePath().resolve(DEX2JAR_VERSION).resolve(DEX2JAR_FILE);
 		Path extractedApkFolder = Paths.get("Extracted_APKs");
 		File extractedApkFile = new File(apkFile.getName().replace(".apk", ""));
 		Path extractionPath = apkFile.toPath().getParent().getParent().resolve(extractedApkFolder)
@@ -112,16 +112,26 @@ public class DexExtractor {
 		final ProcessBuilder processBuilder = new ProcessBuilder();
 		// Redirect any output (including error) to a file. This avoids
 		// deadlocks when the buffers get full.
-		File outputFile = new File(apkFile.getParentFile().getParent() + "//dex2jarOutput.txt");
+		File outputFile = apkFile.toPath().getParent().resolve("dex2jarOutput.txt").toFile();
 		processBuilder.redirectErrorStream(true);
 		processBuilder.redirectOutput(outputFile);
 
 		// Iterate through the list of APKs/dex files to extract, and run
 		// dex2jar on it with processbuilder
 		for (File file : apksToExtract) {
-			String[] command = { pathToDex2Jar.toString(), file.toString() };
+			String machineOS = System.getProperty("os.name").toLowerCase();
+			
+			if (machineOS.startsWith("linux")) {
+				Path pathToDex2Jar = Paths.get("").toAbsolutePath().resolve(DEX2JAR_VERSION).resolve(DEX2JAR_FILE_LINUX);
+				String[] command = {"sh", pathToDex2Jar.toString(), file.toString() };
+				processBuilder.command(command);
+			} 
 
-			processBuilder.command(command);
+			if (machineOS.startsWith("windows")) {
+				Path pathToDex2Jar = Paths.get("").toAbsolutePath().resolve(DEX2JAR_VERSION).resolve(DEX2JAR_FILE_WINDOWS);
+				String[] command = {pathToDex2Jar.toString(), file.toString() };
+				processBuilder.command(command);
+			}
 
 			// Set working directory. By default, this is where the APKs will
 			// extract to.

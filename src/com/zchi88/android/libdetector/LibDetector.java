@@ -87,7 +87,6 @@ public class LibDetector implements Runnable {
 
 		for (Path path : libPaths) {
 			ArrayList<LibraryVersion> libraryVersions;
-
 			// Set an impossible initial levenshtein distance to characters
 			// compared ratio. This will keep track of the closest match of a
 			// library

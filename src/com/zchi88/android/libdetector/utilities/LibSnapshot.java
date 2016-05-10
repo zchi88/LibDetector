@@ -32,7 +32,9 @@ public class LibSnapshot {
 						File diffFileName = new File("diff.txt");
 						Path diffPath = version.toPath().resolve(diffFileName.toPath());
 						if (diffPath.toFile().exists()) {
-							LibraryVersion libVersion = new LibraryVersion(version.toPath());
+							String machineOS = System.getProperty("os.name").toLowerCase();
+
+							LibraryVersion libVersion = new LibraryVersion(version.toPath(), machineOS);
 							
 							// Ensures that the libraries in the snapshot are in chronological order, with the most recent being first
 							if (libraryVersions.size() == 0) {

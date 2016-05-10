@@ -15,7 +15,7 @@ import com.zchi88.android.libdetector.utilities.DiffParser;
  * 
  */
 public class LibraryVersion {
-	public LibraryVersion(final Path versionPath) throws IOException {
+	public LibraryVersion(final Path versionPath, String machineOS) throws IOException {
 		this.versionName = versionPath.getFileName();
 		this.versionPath = versionPath;
 		
@@ -23,10 +23,10 @@ public class LibraryVersion {
 		Path diffPath = versionPath.resolve(diffFileName.toPath());
 		
 		this.versionAge = DiffParser.getVersionAge(diffPath.toFile());
-		this.newFiles = DiffParser.getNewFiles(diffPath.toFile());
-		this.moddedFiles = DiffParser.getModdedFiles(diffPath.toFile());
-		this.deletedFiles = DiffParser.getDeletedFiles(diffPath.toFile());
-		this.copiedFiles = DiffParser.getCopiedFiles(diffPath.toFile());
+		this.newFiles = DiffParser.getNewFiles(diffPath.toFile(), machineOS);
+		this.moddedFiles = DiffParser.getModdedFiles(diffPath.toFile(), machineOS);
+		this.deletedFiles = DiffParser.getDeletedFiles(diffPath.toFile(), machineOS);
+		this.copiedFiles = DiffParser.getCopiedFiles(diffPath.toFile(), machineOS);
 	}
 
 	// The name of the version of the library

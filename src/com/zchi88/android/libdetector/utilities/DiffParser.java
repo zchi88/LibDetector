@@ -15,10 +15,11 @@ public class DiffParser {
 	 * Parses a diff.txt file and looks for version-exclusive files of a library. 
 	 * 
 	 * @param diffFile
+	 * @param machineOS 
 	 * @returna A list of files that are exclusive to a library
 	 * @throws IOException
 	 */
-	public static ArrayList<File> getNewFiles(File diffFile) throws IOException{
+	public static ArrayList<File> getNewFiles(File diffFile, String machineOS) throws IOException{
 		ArrayList<File> exclusiveFilesList = new ArrayList<File>();
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(diffFile.toPath());
@@ -39,6 +40,9 @@ public class DiffParser {
 	    while (scanner.hasNextLine()) {
 	    	nextLine = scanner.nextLine();
 	    	if (!nextLine.isEmpty()) {
+	    		if (machineOS.startsWith("linux")) {
+	    			nextLine = nextLine.replace("\\", "/");
+				}
 				File exclusiveFile = new File(nextLine);
 				exclusiveFilesList.add(exclusiveFile);
 			} else {
@@ -56,7 +60,7 @@ public class DiffParser {
 	 * @return A list of modified files in a library
 	 * @throws IOException
 	 */
-	public static ArrayList<File> getModdedFiles(File diffFile) throws IOException{
+	public static ArrayList<File> getModdedFiles(File diffFile, String machineOS) throws IOException{
 		ArrayList<File> moddedFilesList = new ArrayList<File>();
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(diffFile.toPath());
@@ -77,6 +81,9 @@ public class DiffParser {
 	    while (scanner.hasNextLine()) {
 	    	nextLine = scanner.nextLine();
 	    	if (!nextLine.isEmpty()) {
+	    		if (machineOS.startsWith("linux")) {
+					nextLine = nextLine.replace("\\", "/");
+				}
 				File moddedFile = new File(nextLine);
 				moddedFilesList.add(moddedFile);
 			} else {
@@ -93,7 +100,7 @@ public class DiffParser {
 	 * @return A list of deleted files in a library since the prior version
 	 * @throws IOException
 	 */
-	public static ArrayList<File> getDeletedFiles(File diffFile) throws IOException{
+	public static ArrayList<File> getDeletedFiles(File diffFile, String machineOS) throws IOException{
 		ArrayList<File> deletedFilesList = new ArrayList<File>();
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(diffFile.toPath());
@@ -114,6 +121,9 @@ public class DiffParser {
 	    while (scanner.hasNextLine()) {
 	    	nextLine = scanner.nextLine();
 	    	if (!nextLine.isEmpty()) {
+	    		if (machineOS.startsWith("linux")) {
+	    			nextLine = nextLine.replace("\\", "/");
+				}
 				File deletedFile = new File(nextLine);
 				deletedFilesList.add(deletedFile);
 			} else {
@@ -131,7 +141,7 @@ public class DiffParser {
 	 * @return A list of deleted files in a library since the prior version
 	 * @throws IOException
 	 */
-	public static ArrayList<File> getCopiedFiles(File diffFile) throws IOException{
+	public static ArrayList<File> getCopiedFiles(File diffFile, String machineOS) throws IOException{
 		ArrayList<File> copiedFilesList = new ArrayList<File>();
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(diffFile.toPath());
@@ -152,6 +162,9 @@ public class DiffParser {
 	    while (scanner.hasNextLine()) {
 	    	nextLine = scanner.nextLine();
 	    	if (!nextLine.isEmpty()) {
+	    		if (machineOS.startsWith("linux")) {
+	    			nextLine = nextLine.replace("\\", "/");
+				}
 				File copiedFile = new File(nextLine);
 				copiedFilesList.add(copiedFile);
 			} else {
