@@ -56,7 +56,7 @@ public class ApkProcessor {
 	 * @throws IOException
 	 */
 	public static HashMap<Path, Path> getFileMap(final Path apkPath) throws IOException {
-		HashMap<Path, Path> apkMap = new HashMap<Path, Path>();
+		final HashMap<Path, Path> apkMap = new HashMap<Path, Path>();
 		Files.walkFileTree(apkPath, new SimpleFileVisitor<Path>() {
 			@Override
 			public FileVisitResult visitFile(Path absoluteClassPath, BasicFileAttributes attrs) throws IOException {
