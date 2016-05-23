@@ -54,7 +54,7 @@ An example of the folder structure is shown below. Note that in this example, th
 	
 	Note that the tool expects one argument, which is the path to the libraries whitelist. This is the same whitelist that is being used and maintained by the LibDiff tool.
 
-7. The tool will then create an ```"Extracted_APKs"``` folder. For each APK, it will create a folder in the ```"Extracted_APKs"``` folder named after the APK, and extract the bytecode of the APK to this folder. It will then scan the byecode and try to find matches to any libraries in the provided libraries whitelist. The results will be outputted to a ```libraryMatchResults.txt``` file.
+7. The tool will then create an ```"Extracted_APKs"``` folder. For each APK, it will create a folder in the ```"Extracted_APKs"``` folder named after the APK, and extract the bytecode of the APK to this folder. It will then scan the bytecode and try to find matches to any libraries in the provided libraries whitelist. The results will be outputted to a ```libraryMatchResults.txt``` file.
 
 
 ### NOTES
@@ -62,4 +62,4 @@ The ```libraryMatchResults.txt``` mentions the term "Levenshtein Ratio". This re
 
 
 ### KNOWN ISSUES
-Some APK's have class files that conincide with reserved keywords of the Windows OS (such as "con" or "aux"). Therefore, running the tool on a Windows machine will throw a ```FileNotFoundException``` when it comes across such files, because it cannot create the class file on the disk when it tries to extract out the class files from the APK. The result is that for these APK's, the tool may partially extract out valid class files before it runs into this error, at which point the APK will get skipped for the library scan.
+Some APK's have class files that coincide with reserved keywords of the Windows OS (such as "con" or "aux"). Therefore, running the tool on a Windows machine will throw a ```FileNotFoundException``` when it comes across such files, because it cannot create the class file on the disk when it tries to extract out the class files from the APK. The result is that for these APK's, the tool may partially extract out valid class files before it runs into this error, at which point the APK will get skipped for the library scan.
