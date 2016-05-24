@@ -4,7 +4,7 @@ A tool for detecting external third party libraries used in Android apps. It doe
 ## MOTIVATION
 When library maintainers update their library, developers who use that library may not be aware of the updates. Depending on the content of the update, developers who do not update that library in their applications may be compromising the integrity of their app. In the worst case scenario, the update could be a security patch. This means that not keeping up-to-date with the library may be elevating the risk of malicious attack on the app's users. With LibDiff and LibDetector, we first aim to explore how prevalent it is for developers to use outdated libraries in their apps. Ultimately, we want to provide a means for developers to automatically check for updates to libraries in their applciations. The methodology is as follows:
 
-sdfsdf
+![Thesis Methodology](https://github.com/zchi88/LibDetector/blob/master/Research%20Methodology.png?raw=true "Thesis Methodology")
 
 ## DEPENDENCIES
 - Java 1.7+
