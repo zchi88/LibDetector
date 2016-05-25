@@ -59,6 +59,8 @@ An example of the folder structure is shown below. Note that in this example, th
 
 7. The tool will then create an ```"Extracted_APKs"``` folder. For each APK, it will create a folder in the ```"Extracted_APKs"``` folder named after the APK, and extract the bytecode of the APK to this folder. It will then scan the bytecode and try to find matches to any libraries in the provided libraries whitelist. The results will be outputted to a ```libraryMatchResults.txt``` file.
 
+### RESULTS
+We have included the results of analyzing nearly 21,000 APK's by LibDetector in May 2016 in the ```LibDetector Results``` folder of this repository. Results for each app are zipped into the ```LibDetector Results Per App.zip``` file, while meta-data describing how often each libraries in the whitelist are used can be found in the ```libMetadata.txt``` file.
 
 ### NOTES
 The ```libraryMatchResults.txt``` mentions the term "Levenshtein Ratio". This refers to the ratio of the Levenshtein distance between the class files of a library in the whitelist and the library that exists in the APK to the total size of those files. A ratio of 1.0 means that the files are completely different, and therefore the app most likely does not use that library. However, a ratio of 0.0 means that the files are complete copies, and therefore the app most likely IS using that library.
