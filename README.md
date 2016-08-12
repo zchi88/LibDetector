@@ -60,7 +60,17 @@ An example of the folder structure is shown below. Note that in this example, th
 7. The tool will then create an ```"Extracted_APKs"``` folder. For each APK, it will create a folder in the ```"Extracted_APKs"``` folder named after the APK, and extract the bytecode of the APK to this folder. It will then scan the bytecode and try to find matches to any libraries in the provided libraries whitelist. The results will be outputted to a ```libraryMatchResults.txt``` file.
 
 ### RESULTS
-We have included the results of analyzing nearly 21,000 APK's by LibDetector in May 2016 in the ```LibDetector Results``` folder of this repository. Results for each app are zipped into the ```LibDetector Results Per App.zip``` file, while meta-data describing how often each libraries in the whitelist are used can be found in the ```libMetadata.txt``` file.
+We have included the results of analyzing nearly 21,000 APK's by LibDetector in May 2016 in the ```Results and Analysis``` folder of this repository. The contents of the files are as follows:
+
+- ```LibDetector Results Per App.zip```: The library match results per APK reported by LibDetector 
+- ```LibUse.txt```: Counts the number of APKs consuming each version of a library, and lists them for each version
+- ```APKLibUse.xslx```: Combines the library use report from LibDetector with each APK's meta data
+- ```LibVersionUseFrequency.xlsx```: Plots the frequency of use of each version of a library. Multiple versions of an app are filtered out.
+- ```LibUseTable.xlsx```: Shows the proportion of apps using a version of a library that is 1 minor version, and  1 major version behind.
+- ```Mann Whitney.xlsx```: Reports the rating of apps which use newer versions of a library versus those that use an older version. The comparison is done using the Mann Whitney U Test. Apps with fewer than 10 ratings are filtered out to minimize rating skews. 
+- ```Figures Directory```: Contains all of the tables and figures generated from the data. 
+
+
 
 ### NOTES
 The ```libraryMatchResults.txt``` mentions the term "Levenshtein Ratio". This refers to the ratio of the Levenshtein distance between the class files of a library in the whitelist and the library that exists in the APK to the total size of those files. A ratio of 1.0 means that the files are completely different, and therefore the app most likely does not use that library. However, a ratio of 0.0 means that the files are complete copies, and therefore the app most likely IS using that library.
