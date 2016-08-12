@@ -60,7 +60,7 @@ An example of the folder structure is shown below. Note that in this example, th
 7. The tool will then create an ```"Extracted_APKs"``` folder. For each APK, it will create a folder in the ```"Extracted_APKs"``` folder named after the APK, and extract the bytecode of the APK to this folder. It will then scan the bytecode and try to find matches to any libraries in the provided libraries whitelist. The results will be outputted to a ```libraryMatchResults.txt``` file.
 
 ### RESULTS
-We have included the results of analyzing nearly 21,000 APK's by LibDetector in May 2016 in the ```Results and Analysis``` folder of this repository. The contents of the files are as follows:
+We have included the results of analyzing nearly 21,000 APK's by LibDetector in May of 2016 in the ```Results and Analysis``` folder of this repository. The contents of the files are as follows:
 
 - ```LibDetector Results Per App.zip```: The library match results per APK reported by LibDetector 
 - ```LibUse.txt```: Counts the number of APKs consuming each version of a library, and lists them for each version
